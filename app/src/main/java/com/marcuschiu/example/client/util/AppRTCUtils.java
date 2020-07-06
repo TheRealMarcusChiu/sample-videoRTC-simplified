@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.client.util;
+package com.marcuschiu.example.client.util;
 
 import android.os.Build;
 import android.util.Log;

@@ -1,11 +1,11 @@
-package com.marcuschiu.meet.client;
+package com.marcuschiu.example.client;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 
-import com.marcuschiu.meet.client.util.AsyncHttpURLConnection;
-import com.marcuschiu.meet.client.util.Util;
+import com.marcuschiu.example.client.util.AsyncHttpURLConnection;
+import com.marcuschiu.example.client.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;

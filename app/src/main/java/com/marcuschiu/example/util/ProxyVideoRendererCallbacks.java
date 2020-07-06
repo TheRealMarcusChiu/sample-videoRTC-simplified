@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.util;
+package com.marcuschiu.example.util;
 
 import org.webrtc.Logging;
 import org.webrtc.VideoRenderer;

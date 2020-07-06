@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.client;
+package com.marcuschiu.example.client;
 
 import org.webrtc.IceCandidate;
 import org.webrtc.PeerConnection;

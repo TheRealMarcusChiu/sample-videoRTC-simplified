@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.util;
+package com.marcuschiu.example.util;
 
 import android.content.Context;
 

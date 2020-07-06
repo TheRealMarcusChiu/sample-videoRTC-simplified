@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.android;
+package com.marcuschiu.example.android;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,13 +7,13 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.marcuschiu.meet.client.AppRTCClient;
-import com.marcuschiu.meet.client.WebSocketRTCClient;
-import com.marcuschiu.meet.client.pc.PeerConnectionClient;
-import com.marcuschiu.meet.client.pc.PeerConnectionEvents;
-import com.marcuschiu.meet.util.CameraUtil;
-import com.marcuschiu.meet.util.ProxyVideoRendererCallbacks;
-import com.marcuschiu.meet.util.ProxyVideoSink;
+import com.marcuschiu.example.client.AppRTCClient;
+import com.marcuschiu.example.client.WebSocketRTCClient;
+import com.marcuschiu.example.client.pc.PeerConnectionClient;
+import com.marcuschiu.example.client.pc.PeerConnectionEvents;
+import com.marcuschiu.example.util.CameraUtil;
+import com.marcuschiu.example.util.ProxyVideoRendererCallbacks;
+import com.marcuschiu.example.util.ProxyVideoSink;
 
 import org.webrtc.IceCandidate;
 import org.webrtc.RendererCommon;

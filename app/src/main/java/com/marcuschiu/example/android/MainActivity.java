@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.android;
+package com.marcuschiu.example.android;
 
 import android.app.Activity;
 import android.content.Intent;

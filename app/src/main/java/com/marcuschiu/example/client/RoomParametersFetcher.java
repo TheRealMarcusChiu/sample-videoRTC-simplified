@@ -1,8 +1,8 @@
-package com.marcuschiu.meet.client;
+package com.marcuschiu.example.client;
 
 import android.util.Log;
 
-import com.marcuschiu.meet.client.util.AsyncHttpURLConnection;
+import com.marcuschiu.example.client.util.AsyncHttpURLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,7 +101,6 @@ public class RoomParametersFetcher {
             List<PeerConnection.IceServer> iceServers = iceServersFromPCConfigJSON(roomJson.getString("pc_config"));
             boolean isTurnPresent = false;
             for (PeerConnection.IceServer server : iceServers) {
-                Log.d(TAG, "IceServer: " + server);
                 for (String uri : server.urls) {
                     if (uri.startsWith("turn:")) {
                         isTurnPresent = true;
@@ -111,11 +110,7 @@ public class RoomParametersFetcher {
             }
             // Request TURN servers.
             if (!isTurnPresent && !roomJson.optString("ice_server_url").isEmpty()) {
-                List<PeerConnection.IceServer> turnServers = requestTurnServers(roomJson.getString("ice_server_url"));
-                for (PeerConnection.IceServer turnServer : turnServers) {
-                    Log.d(TAG, "TurnServer: " + turnServer);
-                    iceServers.add(turnServer);
-                }
+                iceServers.addAll(requestTurnServers(roomJson.getString("ice_server_url")));
             }
 
             AppRTCClient.SignalingParameters params = new AppRTCClient.SignalingParameters(iceServers, initiator, clientId, wssUrl, wssPostUrl, offerSdp, iceCandidates);
@@ -129,8 +124,7 @@ public class RoomParametersFetcher {
 
     // Requests & returns a TURN ICE Server based on a request URL.  Must be run
     // off the main thread!
-    private List<PeerConnection.IceServer> requestTurnServers(String url)
-            throws IOException, JSONException {
+    private List<PeerConnection.IceServer> requestTurnServers(String url) throws IOException, JSONException {
         List<PeerConnection.IceServer> turnServers = new ArrayList<>();
         Log.d(TAG, "Request TURN from: " + url);
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();

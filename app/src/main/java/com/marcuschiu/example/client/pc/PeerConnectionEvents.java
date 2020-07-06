@@ -1,4 +1,4 @@
-package com.marcuschiu.meet.client.pc;
+package com.marcuschiu.example.client.pc;
 
 import org.webrtc.IceCandidate;
 import org.webrtc.SessionDescription;

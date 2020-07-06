@@ -1,9 +1,9 @@
-package com.marcuschiu.meet.client;
+package com.marcuschiu.example.client;
 
 import android.os.Handler;
 import android.util.Log;
 
-import com.marcuschiu.meet.client.util.AsyncHttpURLConnection;
+import com.marcuschiu.example.client.util.AsyncHttpURLConnection;
 
 import de.tavendo.autobahn.WebSocket.WebSocketConnectionObserver;
 import de.tavendo.autobahn.WebSocketConnection;

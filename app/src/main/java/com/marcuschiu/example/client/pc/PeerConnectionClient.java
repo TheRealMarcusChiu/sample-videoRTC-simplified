@@ -1,10 +1,10 @@
-package com.marcuschiu.meet.client.pc;
+package com.marcuschiu.example.client.pc;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.marcuschiu.meet.client.AppRTCClient;
-import com.marcuschiu.meet.client.util.Util;
+import com.marcuschiu.example.client.AppRTCClient;
+import com.marcuschiu.example.client.util.Util;
 
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
@@ -38,13 +38,9 @@ import org.webrtc.voiceengine.WebRtcAudioTrack.AudioTrackStartErrorCode;
 import org.webrtc.voiceengine.WebRtcAudioUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PeerConnectionClient {
 
@@ -178,16 +174,7 @@ public class PeerConnectionClient {
                 queuedRemoteCandidates = new ArrayList<>();
 
                 pcFactory.setVideoHwAccelerationOptions(rootEglBase.getEglBaseContext(), rootEglBase.getEglBaseContext());
-
-                PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration(signalingParameters.iceServers);
-                rtcConfig.tcpCandidatePolicy = PeerConnection.TcpCandidatePolicy.DISABLED; // TCP candidates are only useful when connecting to a server that supports ICE-TCP
-                rtcConfig.bundlePolicy = PeerConnection.BundlePolicy.MAXBUNDLE;
-                rtcConfig.rtcpMuxPolicy = PeerConnection.RtcpMuxPolicy.REQUIRE;
-                rtcConfig.continualGatheringPolicy = PeerConnection.ContinualGatheringPolicy.GATHER_CONTINUALLY;
-                rtcConfig.keyType = PeerConnection.KeyType.ECDSA; // Use ECDSA encryption
-                rtcConfig.enableDtlsSrtp = true; // Enable DTLS for normal calls and disable for loopback calls
-
-                pc = pcFactory.createPeerConnection(rtcConfig, new PCObserver());
+                pc = pcFactory.createPeerConnection(new PeerConnection.RTCConfiguration(signalingParameters.iceServers), new PCObserver());
 
                 MediaStream mediaStream = pcFactory.createLocalMediaStream("ARDAMS");
 

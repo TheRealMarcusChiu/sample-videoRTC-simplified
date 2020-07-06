@@ -1,8 +1,8 @@
-package com.marcuschiu.meet.client.util;
+package com.marcuschiu.example.client.util;
 
 import android.util.Log;
 
-import com.marcuschiu.meet.client.pc.PeerConnectionClient;
+import com.marcuschiu.example.client.pc.PeerConnectionClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
