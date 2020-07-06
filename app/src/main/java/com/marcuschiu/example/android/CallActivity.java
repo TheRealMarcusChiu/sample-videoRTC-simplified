@@ -70,7 +70,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
         pcClient.createPeerConnectionFactory(getApplicationContext(), this);
 
-        String roomID = "JESUS-" + new Random().nextInt(1000);
+        String roomID = "GOD-" + new Random().nextInt(1000);
         ((TextView) findViewById(R.id.roomID)).setText("ROOM ID: " + roomID);
 
         // connect to room
@@ -94,11 +94,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     @Override
     public void onConnectedToRoom(final AppRTCClient.SignalingParameters sp) {
         runOnUiThread(() -> {
-            VideoCapturer videoCapturer = CameraUtil.getVideoCapturer(this);
-            if (videoCapturer == null) {
-                reportError("Failed to open camera");
-            }
-            pcClient.createPeerConnection(localVideo, remoteVideo, videoCapturer, sp);
+            pcClient.createPeerConnection(localVideo, remoteVideo, CameraUtil.getVideoCapturer(this), sp.iceServers);
 
             isInitiator = sp.initiator;
             if (isInitiator) {
@@ -159,7 +155,6 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         } else {
             appRtcClient.sendAnswerSdp(sdp);
         }
-        pcClient.setVideoMaxBitrate(1700);
     }
 
     @Override

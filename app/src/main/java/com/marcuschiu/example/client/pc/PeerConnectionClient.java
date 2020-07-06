@@ -156,7 +156,7 @@ public class PeerConnectionClient {
         });
     }
 
-    public void createPeerConnection(final VideoSink localVideo, final VideoRenderer.Callbacks remoteVideo, final VideoCapturer videoCapturer, final AppRTCClient.SignalingParameters signalingParameters) {
+    public void createPeerConnection(final VideoSink localVideo, final VideoRenderer.Callbacks remoteVideo, final VideoCapturer videoCapturer, final List<PeerConnection.IceServer> iceServers) {
         this.remoteVideo = remoteVideo;
         this.videoCapturer = videoCapturer;
         executor.execute(() -> {
@@ -174,7 +174,7 @@ public class PeerConnectionClient {
                 queuedRemoteCandidates = new ArrayList<>();
 
                 pcFactory.setVideoHwAccelerationOptions(rootEglBase.getEglBaseContext(), rootEglBase.getEglBaseContext());
-                pc = pcFactory.createPeerConnection(new PeerConnection.RTCConfiguration(signalingParameters.iceServers), new PCObserver());
+                pc = pcFactory.createPeerConnection(new PeerConnection.RTCConfiguration(iceServers), new PCObserver());
 
                 MediaStream mediaStream = pcFactory.createLocalMediaStream("ARDAMS");
 
@@ -316,28 +316,6 @@ public class PeerConnectionClient {
             if (videoCapturer != null && videoCapturerStopped) {
                 videoCapturer.startCapture(HD_VIDEO_WIDTH, HD_VIDEO_HEIGHT, FRAMES_PER_SECOND);
                 videoCapturerStopped = false;
-            }
-        });
-    }
-
-    public void setVideoMaxBitrate(final Integer maxBitrateKbps) {
-        executor.execute(() -> {
-            if (pc == null || localVideoSender == null || isError) {
-                return;
-            }
-
-            RtpParameters parameters = localVideoSender.getParameters();
-            if (parameters.encodings.size() == 0) {
-                Log.w(TAG, "RtpParameters are not ready.");
-                return;
-            }
-
-            for (RtpParameters.Encoding encoding : parameters.encodings) {
-                // Null value means no limit.
-                encoding.maxBitrateBps = maxBitrateKbps == null ? null : maxBitrateKbps * BPS_IN_KBPS;
-            }
-            if (!localVideoSender.setParameters(parameters)) {
-                Log.e(TAG, "RtpSender.setParameters failed.");
             }
         });
     }
